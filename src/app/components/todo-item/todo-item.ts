@@ -8,14 +8,14 @@ import { Todo } from '../../models/todo.model';
 })
 export class TodoItemComponent {
   @Input() todo!: Todo;
-  @Output() toggle = new EventEmitter<number>();
-  @Output() delete = new EventEmitter<number>();
+  @Output() toggle = new EventEmitter<Todo>();
+  @Output() delete = new EventEmitter<string>();
 
   onToggle() {
-    this.toggle.emit(this.todo.id);
+    this.toggle.emit(this.todo);
   }
 
   onDelete() {
-    this.delete.emit(this.todo.id);
+    this.delete.emit(this.todo._id);
   }
 }

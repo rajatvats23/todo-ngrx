@@ -13,7 +13,6 @@ export class TodoService {
 
   addTodo(title: string) {
     const newTodo: Todo = {
-      id: Date.now(),
       title,
       completed: false
     };
@@ -21,16 +20,16 @@ export class TodoService {
     this.todosSubject.next(this.todos);
   }
 
-  toggleTodo(id: number) {
-    const todo = this.todos.find(t => t.id === id);
+  toggleTodo(id: string) {
+    const todo = this.todos.find(t => t._id === id);
     if (todo) {
       todo.completed = !todo.completed;
       this.todosSubject.next(this.todos);
     }
   }
 
-  deleteTodo(id: number) {
-    this.todos = this.todos.filter(t => t.id !== id);
+  deleteTodo(id: string) {
+    this.todos = this.todos.filter(t => t._id !== id);
     this.todosSubject.next(this.todos);
   }
 }
