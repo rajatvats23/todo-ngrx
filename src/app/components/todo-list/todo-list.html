@@ -1,0 +1,10 @@
+<div class="todo-list">
+  <app-todo-item 
+    *ngFor="let todo of todos$ | async"
+    [todo]="todo"
+    (toggle)="onToggle($event)"
+    (delete)="onDelete($event)"
+  ></app-todo-item>
+  
+  <p *ngIf="(todos$ | async)?.length === 0">No todos yet!</p>
+</div>

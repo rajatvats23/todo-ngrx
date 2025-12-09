@@ -1,0 +1,9 @@
+<div class="add-todo">
+  <input 
+    #todoInput 
+    type="text" 
+    placeholder="What needs to be done?"
+    (keyup.enter)="onSubmit(todoInput)"
+  />
+  <button (click)="onSubmit(todoInput)">Add</button>
+</div>
