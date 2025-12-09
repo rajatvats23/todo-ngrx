@@ -49,3 +49,13 @@ export const deleteTodo = createAction(
     '[Todo] Delete Todo',
     props<{ id: string }>()
 )
+
+export const deleteTodoSucess = createAction(
+    '[Todo] Delete Todo Success',
+    props<{ id: string }>()
+)
+
+export const deleteTodoFailure = createAction(
+    '[Todo] Delete Todo Failure',
+    props<{ error: string }>()
+)

@@ -25,5 +25,10 @@ export const todoReducer = createReducer(
     on(TodoActions.deleteTodo, (state, { id }) => ({
         ...state,
         todos: state.todos.filter(todo => todo._id !== id)
+    })),
+
+    on(TodoActions.deleteTodoSucess, (state, { id }) => ({
+        ...state,
+        todos: state.todos.filter(t => t._id !== id)
     }))
 )

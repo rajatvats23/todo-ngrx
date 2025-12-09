@@ -24,6 +24,17 @@ export class TodoEffects {
         )
     )
 
+    deleteTodo$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(TodoActions.deleteTodo),
+            mergeMap(action =>
+                this.todoApi.deleteTodo(action.id).pipe(
+                    map(response => TodoActions.deleteTodoSucess({id: action.id})),
+                    catchError(error => of(TodoActions.deleteTodoFailure({ error: error.message })))
+                )
+            )
+        ))
+
     toggleTodo$ = createEffect(() =>
         this.actions$.pipe(
             ofType(TodoActions.toggleTodo),
