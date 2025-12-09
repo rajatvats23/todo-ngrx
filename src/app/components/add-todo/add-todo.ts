@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { TodoService } from '../../services/todo';
+import { Store } from '@ngrx/store';
+import * as TodoActions from '../../store/todo.actions';
 
 @Component({
   selector: 'app-add-todo',
@@ -7,12 +8,12 @@ import { TodoService } from '../../services/todo';
   styleUrls: ['./add-todo.css']
 })
 export class AddTodoComponent {
-  constructor(private todoService: TodoService) {}
+  constructor(private store: Store) {}
 
   onSubmit(input: HTMLInputElement) {
     const title = input.value.trim();
     if (title) {
-      this.todoService.addTodo(title);
+      this.store.dispatch(TodoActions.addTodo({title}));
       input.value = '';
     }
   }

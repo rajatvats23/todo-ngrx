@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo.model';
 import { TodoService } from '../../services/todo';
-import { AddTodoComponent } from '../add-todo/add-todo';
 import { TodoItemComponent } from '../todo-item/todo-item';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import * as TodoActions from '../../store/todo.actions';
+import { selectAllTodos } from '../../store/todo.selectors';
 
 @Component({
   selector: 'app-todo-list',
@@ -17,17 +19,17 @@ import { CommonModule } from '@angular/common';
 export class TodoListComponent implements OnInit {
   todos$!: Observable<Todo[]>;
 
-  constructor(private todoService: TodoService) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.todos$ = this.todoService.todos$;
+    this.todos$ = this.store.select(selectAllTodos);
   }
 
   onToggle(id: number) {
-    this.todoService.toggleTodo(id);
+    this.store.dispatch(TodoActions.toggleTodo({id}))
   }
-
+  
   onDelete(id: number) {
-    this.todoService.deleteTodo(id);
+    this.store.dispatch(TodoActions.deleteTodo({id}))
   }
 }
